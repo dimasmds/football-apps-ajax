@@ -15,13 +15,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function getTeam(teamName) {
-    // look branch for sample implementing request
+    content.innerHTML = progressBar;
+    fetch(BASE_URL + teamName)
+        .then(function (response) {
+            return response.json()
+        })
+        .catch(function (err) {
+            console.log(`Ups, ${err} :(`)
+        })
+        .then(showTeam)
 }
 
 function showTeam(data) {
+    console.log(data);
     let responseText = `<div class="row">`;
 
-    if(data.teams !== null) {
+    if (data.teams !== null) {
         data.teams.forEach(function (item) {
             responseText += `<div class="col s12 m6 l4"> <div class="card">
         <div class="card-image">
