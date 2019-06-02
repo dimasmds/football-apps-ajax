@@ -1,11 +1,11 @@
 const BASE_URL = 'https://www.thesportsdb.com/api/v1/json/1/searchteams.php?t=';
-var progressBar = ` <div class="progress">
+const progressBar = ` <div class="progress">
                         <div class="indeterminate"></div>
                     </div>`;
 let content = document.getElementById("content");
 
 document.addEventListener("DOMContentLoaded", function () {
-    let searchInput = document.getElementById("search-team")
+    let searchInput = document.getElementById("search-team");
     searchInput.addEventListener("keyup", function (event) {
         if (event.key === "Enter") {
             getTeam(searchInput.value)
@@ -15,13 +15,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function getTeam(teamName) {
-
+    content.innerHTML = progressBar;
+    const asyncRequestObject = new XMLHttpRequest();
+    asyncRequestObject.open('GET', BASE_URL + teamName);
+    asyncRequestObject.onload = function handleSuccess() {
+        const data = JSON.parse(this.responseText);
+        showTeam(data)
+    };
+    asyncRequestObject.onerror = function handleError() {
+        console.log('Ups, Failed to load data :(')
+    };
+    asyncRequestObject.send()
 }
 
 function showTeam(data) {
-    let responseText = `<div class="row">`
+    let responseText = `<div class="row">`;
 
-    if(data.teams !== null) {
+    if (data.teams !== null) {
         data.teams.forEach(function (item) {
             responseText += `<div class="col s12 m6 l4"> <div class="card">
         <div class="card-image">
