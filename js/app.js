@@ -15,7 +15,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function getTeam(teamName) {
-    // look branch for sample implementing request
+    content.innerHTML = progressBar;
+    $.ajax({
+        url: BASE_URL + teamName
+    }).done(showTeam)
 }
 
 function showTeam(data) {
