@@ -1,11 +1,11 @@
 const BASE_URL = 'https://www.thesportsdb.com/api/v1/json/1/searchteams.php?t=';
-var progressBar = ` <div class="progress">
+const progressBar = ` <div class="progress">
                         <div class="indeterminate"></div>
                     </div>`;
 let content = document.getElementById("content");
 
 document.addEventListener("DOMContentLoaded", function () {
-    let searchInput = document.getElementById("search-team")
+    let searchInput = document.getElementById("search-team");
     searchInput.addEventListener("keyup", function (event) {
         if (event.key === "Enter") {
             getTeam(searchInput.value)
@@ -15,11 +15,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function getTeam(teamName) {
-
+    // look branch for sample implementing request
 }
 
 function showTeam(data) {
-    let responseText = `<div class="row">`
+    let responseText = `<div class="row">`;
 
     if(data.teams !== null) {
         data.teams.forEach(function (item) {
