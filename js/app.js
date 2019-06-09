@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function getTeam(teamName) {
+    content.innerHTML = progressBar;
     // look branch for sample implementing request
 }
 
