@@ -18,13 +18,15 @@ function getTeam(teamName) {
     content.innerHTML = progressBar;
     $.ajax({
         url: BASE_URL + teamName
-    }).done(showTeam)
+    }).done(showTeam).fail(function (err) {
+        console.log(err)
+    })
 }
 
 function showTeam(data) {
     let responseText = `<div class="row">`;
 
-    if(data.teams !== null) {
+    if (data.teams !== null) {
         data.teams.forEach(function (item) {
             responseText += `<div class="col s12 m6 l4"> <div class="card">
         <div class="card-image">
